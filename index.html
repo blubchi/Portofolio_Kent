@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Ken</title>
+  <style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* ==== HEADER ==== */
+header {
+  position: sticky;
+  top: 0;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+}
+
+header nav a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+
+header nav a:hover {
+  color: #007BFF;
+}
+
+/* ==== LANDING ==== */
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.profile-container:hover .profile-img {
+  transform: scale(1.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* ==== LOGO SEKOLAH ORBIT ==== */
+.school-logo {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.5s ease;
+}
+
+.profile-container:hover .school-logo {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.school1 { top: 50%; left: -90px; transform: translateY(-50%) scale(0.5); }
+.school2 { top: -90px; left: 50%; transform: translateX(-50%) scale(0.5); }
+.school3 { top: 50%; right: -90px; transform: translateY(-50%) scale(0.5); }
+
+/* ==== LANDING TEXT ==== */
+.landing h2 {
+  font-size: 56px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 20px 0 0;
+}
+
+.landing p {
+  font-size: 20px;
+  max-width: 600px;
+  margin-top: 15px;
+  color: #555;
+}
+
+/* ==== ABOUT ==== */
+.about {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 40px 10%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==== PROJECTS ==== */
+.projects {
+  padding: 80px 10%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==== PROJECT CARD ==== */
+.project-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  height: 220px; /* tinggi default */
+  transition: all 0.4s ease;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.project-card h3,
+.project-card .detail {
+  position: relative;
+  z-index: 2;
+}
+
+.project-card h3 {
+  margin: 0;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+/* detail sembunyi */
+.project-card .detail {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #eee;
+}
+
+/* hover hanya memperbesar card itu sendiri */
+.project-card:hover {
+  height: 340px; /* card lebih tinggi */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.project-card:hover h3 {
+  color: #ffd700;
+}
+
+.project-card:hover .detail {
+  opacity: 1;
+  max-height: 300px;
+}
+
+/* ==== FOOTER ==== */
+footer {
+  text-align: center;
+  padding: 30px;
+  background: #f0f0f0;
+  margin-top: 50px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ==== AKSEN BULAT ==== */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateY(50px) scale(0.5);
+  transition: all 1s ease;
+  z-index: 0;
+}
+
+.circle.show {
+  opacity: 0.3;
+  transform: translateY(0) scale(1);
+}
+
+.circle.blue { width: 80px; height: 80px; background: #2563eb; }
+.circle.purple { width: 120px; height: 120px; background: #7c3aed; }
+.circle.orange { width: 60px; height: 60px; background: #f59e0b; }
+
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>Korompis</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </header>
+
+  <section id="home" class="landing">
+    <div class="profile-container">
+      <img src="assets/image/gambar ken.jpg" alt="Foto Ken" class="profile-img">
+      <img src="assets/image/logoPROVI.png" class="school-logo school1">
+      <img src="assets/image/logoSDH.png" class="school-logo school2">
+      <img src="assets/image/logoUPH.png" class="school-logo school3">
+      
+    </div>
+    <h2>Hi! I'm Kent</h2>
+    <p>Saya seorang programmer yang fokus pada web & software development.<br>
+    Gulir ke bawah untuk melihat project-project saya 🚀</p>
+
+    <!-- Circle aksen -->
+    <div class="circle blue" style="top:15%; left:10%;"></div>
+    <div class="circle purple" style="bottom:20%; right:15%;"></div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    Halo, nama saya <b>Kent Richi Korompis</b>. Saya adalah mahasiswa Informatika di Universitas Pelita Harapan 
+    dengan pengalaman dalam <b>Informatics, Leadership, Public Speaking, dan Education</b>. 
+    Saya memiliki passion besar pada bidang <b>Informatics & Software Engineering</b>, dan terus mengikuti perkembangan terbaru dalam dunia teknologi. 
+    
+    Saya pernah menjadi <b>Founder & Initiator Touwanua Student Organization</b> dengan lebih dari 300 anggota aktif, 
+    <b>Leader of ArtBand Student Activity Unit</b>, serta aktif di berbagai organisasi seperti 
+    Informatics Student Association dan Billiard Student Unit. 
+    
+    Melalui pengalaman ini, saya mengasah keterampilan di <b>website building & engineering, project management, developer team collaboration, serta data analysis</b>.
+
+    <div class="circle orange" style="top:30%; left:5%;"></div>
+    <div class="circle blue" style="bottom:10%; right:20%;"></div>
+  </section>
+
+<section id="projects">
+  <h2 style="text-align:center; margin-bottom:40px;">My Projects</h2>
+  <div class="projects">
+    
+    <div class="project-card" style="background-image:url('assets/bg/iot.jpg'); background-size:cover; background-position:center;">
+      <h3>IoT System Development – Room Mold Detection</h3>
+      <p class="detail">
+        Mengembangkan sistem IoT berbasis <b>ESP32/Arduino</b> dengan sensor DHT11 dan Flying Fish Gas Sensor 
+        untuk mengukur suhu, kelembaban, serta kualitas udara. Data dikirim ke <b>MySQL</b> untuk analisis 
+        dan dipakai dalam model <b>machine learning</b> untuk memprediksi risiko jamur.
+      </p>
+    </div>
+
+    <div class="project-card" style="background-image:url('assets/bg/iot.jpg'); background-size:cover; background-position:center;">
+      <h3>Website Development – Student Development & Alumni Engagement</h3>
+      <p class="detail">
+        Membangun website menggunakan <b>HTML, CSS, dan JavaScript</b> untuk mendukung engagement mahasiswa dan alumni di UPH. 
+        Menggunakan metode <b>Agile (Scrum)</b> dengan sprint planning, stand-up, dan retrospektif. 
+        Website dipublikasikan dengan domain custom.
+      </p>
+    </div>
+
+    <div class="project-card" style="background-image:url('assets/bg/iot.jpg'); background-size:cover; background-position:center;">
+      <h3>Database Development – School Management System</h3>
+      <p class="detail">
+        Merancang database sekolah menggunakan <b>MySQL</b> dengan ERD, flowchart, dan logika kompleks untuk 
+        mendukung administrasi, akademik, serta data operasional. 
+        Proyek berbasis studi kasus nyata dari sekolah dasar hingga menengah atas.
+      </p>
+    </div>
+
+    <div class="project-card" style="background-image:url('assets/bg/iot.jpg'); background-size:cover; background-position:center;">
+      <h3>Java Programming – Poker Game</h3>
+      <p class="detail">
+        Bekerja dalam tim untuk mengembangkan game <b>Poker</b> dengan gameplay realistis. 
+        Merancang logika permainan dan antarmuka pengguna menggunakan <b>Java</b> serta pustaka tambahan.
+      </p>
+    </div>
+
+    <div class="project-card" style="background-image:url('assets/bg/iot.jpg'); background-size:cover; background-position:center;">
+      <h3>Network Interface Project – TCP & UDP Protocols</h3>
+      <p class="detail">
+        Melakukan konfigurasi dan analisis protokol <b>TCP & UDP</b> menggunakan <b>Wireshark</b>. 
+        Proyek ini memberikan pengalaman dalam menganalisis packet structures dan komunikasi jaringan real-time.
+      </p>
+    </div>
+
+    <div class="project-card" style="background-image:url('assets/bg/iot.jpg'); background-size:cover; background-position:center;">
+      <h3>Frogger Game – C++ CLI</h3>
+      <p class="detail">
+        Mengembangkan game klasik <b>Frogger</b> menggunakan <b>C++</b> dengan Command Line Interface (CLI). 
+        Menerapkan logika kompleks untuk sistem gerakan dan aturan permainan.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+  <footer>
+    &copy; 2025 Kent. All rights reserved.
+  </footer>
+
+  <script>
+    // observer untuk animasi scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll(".circle").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
